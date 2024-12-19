@@ -44,7 +44,7 @@ apply(const char *col_name,
 
     auto    &col = get_column<T>(col_name);
 
-    for (const auto &[idx, val] : std::ranges::views::zip(indices_, col))
+    for (const auto &[idx, val] : ranges::view::zip(indices_, col))
         if (! func(idx, val)) [[unlikely]]  break;
 }
 
@@ -62,7 +62,7 @@ apply(const char *col_name1, const char *col_name2,
 
     guard.release();
     for (const auto &[idx, val1, val2]
-             : std::ranges::views::zip(indices_, col1, col2))
+             : ranges::view::zip(indices_, col1, col2))
         if (! func(idx, val1, val2)) [[unlikely]]  break;
 }
 
@@ -81,7 +81,7 @@ apply(const char *col_name1, const char *col_name2, const char *col_name3,
 
     guard.release();
     for (const auto &[idx, val1, val2, val3]
-             : std::ranges::views::zip(indices_, col1, col2, col3))
+             : ranges::view::zip(indices_, col1, col2, col3))
         if (! func(idx, val1, val2, val3)) [[unlikely]]  break;
 }
 

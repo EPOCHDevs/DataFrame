@@ -731,7 +731,7 @@ load_column(const char *new_col_name,
 
     n_col.reserve(padding == nan_policy::pad_with_nans
                       ? indices_.size() : e_col.size());
-    for (const auto &[idx, val] : std::ranges::views::zip(indices_, e_col))
+    for (const auto &[idx, val] : ranges::view::zip(indices_, e_col))
         n_col.push_back(func(idx, val));
     return (load_column<NT>(new_col_name, std::move(n_col), padding, do_lock));
 }

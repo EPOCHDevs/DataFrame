@@ -1923,7 +1923,7 @@ _sort_by_sorted_index_(T &to_be_sorted,
                        BV &done_vec,
                        size_t idx_s) {
 
-    std::ranges::fill(done_vec, 0);
+    std::fill(done_vec.begin(), done_vec.end(), 0);
     for (std::size_t i = 0; i < idx_s; ++i) [[likely]]  {
         if (! done_vec[i]) [[likely]]  {
             done_vec[i] = 1;

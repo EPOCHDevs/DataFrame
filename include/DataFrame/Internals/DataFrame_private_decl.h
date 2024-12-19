@@ -31,6 +31,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <cstdio>
 #include <ranges>
+#include <range/v3/range.hpp>
 
 // ----------------------------------------------------------------------------
 
@@ -1148,7 +1149,7 @@ replace_vector_vals_(V &data_vec,
 
     using map_t = DFUnorderedMap<T, T>;
 
-    const auto  v_zip = std::ranges::views::zip(old_values, new_values);
+    const auto  v_zip = ranges::zip_view(old_values, new_values);
     const map_t v_map (v_zip.begin(), v_zip.end());
     const auto  thread_level =
         (data_vec.size() < ThreadPool::MUL_THR_THHOLD || limit >= 0)

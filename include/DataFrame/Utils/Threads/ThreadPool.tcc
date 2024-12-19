@@ -28,8 +28,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 */
 
 #include <DataFrame/Utils/Threads/ThreadPool.h>
-
 #include <algorithm>
+#include <range/v3/iterator/access.hpp>
+#include <range/v3/algorithm/sort.hpp>
 
 // ----------------------------------------------------------------------------
 
@@ -284,13 +285,13 @@ ThreadPool::parallel_sort(const I begin, const I end, P compare)  {
         while (fwd_iter <= right_iter)  {
             if (compare(*fwd_iter, pivot))  {
                 is_swapped_left = true;
-                std::iter_swap(left_iter, fwd_iter);
+                ranges::iter_swap(left_iter, fwd_iter);
                 ++left_iter;
                 ++fwd_iter;
             }
             else if (compare(pivot, *fwd_iter))  {
                 is_swapped_right = true;
-                std::iter_swap(right_iter, fwd_iter);
+                ranges::iter_swap(right_iter, fwd_iter);
                 --right_iter;
             }
             else ++fwd_iter;
@@ -329,10 +330,10 @@ ThreadPool::parallel_sort(const I begin, const I end, P compare)  {
         }
         else  {
             if (is_swapped_left)
-                std::sort(begin, left_iter, compare);
+                ranges::sort(begin, left_iter, compare);
 
             if (is_swapped_right)
-                std::sort(right_iter + 1, end, compare);
+                ranges::sort(right_iter + 1, end, compare);
         }
     }
 }

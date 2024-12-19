@@ -72,8 +72,8 @@ sort(const char *name, sort_spec dir, bool ignore_index)  {
 
     std::iota(sorting_idxs.begin(), sorting_idxs.end(), 0);
 
-    auto        zip = std::ranges::views::zip(*vec, sorting_idxs);
-    auto        zip_idx = std::ranges::views::zip(*vec, indices_, sorting_idxs);
+    auto        zip = ranges::view::zip(*vec, sorting_idxs);
+    auto        zip_idx = ranges::view::zip(*vec, indices_, sorting_idxs);
     const auto  thread_level =
         (idx_s < ThreadPool::MUL_THR_THHOLD) ? 0L : get_thread_level();
 
@@ -86,9 +86,9 @@ sort(const char *name, sort_spec dir, bool ignore_index)  {
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, a);
+                ranges::sort(zip_idx, a);
             else
-                std::ranges::sort(zip, a);
+                ranges::sort(zip, a);
         }
     }
     else if (dir == sort_spec::desce)  {
@@ -100,9 +100,9 @@ sort(const char *name, sort_spec dir, bool ignore_index)  {
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, d);
+                ranges::sort(zip_idx, d);
             else
-                std::ranges::sort(zip, d);
+                ranges::sort(zip, d);
         }
     }
     else if (dir == sort_spec::abs_ascen)  {
@@ -114,9 +114,9 @@ sort(const char *name, sort_spec dir, bool ignore_index)  {
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, aa);
+                ranges::sort(zip_idx, aa);
             else
-                std::ranges::sort(zip, aa);
+                ranges::sort(zip, aa);
         }
     }
     else if (dir == sort_spec::abs_desce)  {
@@ -128,9 +128,9 @@ sort(const char *name, sort_spec dir, bool ignore_index)  {
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, ad);
+                ranges::sort(zip_idx, ad);
             else
-                std::ranges::sort(zip, ad);
+                ranges::sort(zip, ad);
         }
     }
 
@@ -294,9 +294,9 @@ sort(const char *name1, sort_spec dir1,
 
     std::iota(sorting_idxs.begin(), sorting_idxs.end(), 0);
 
-    auto        zip = std::ranges::views::zip(*vec1, *vec2, sorting_idxs);
+    auto        zip = ranges::view::zip(*vec1, *vec2, sorting_idxs);
     auto        zip_idx =
-        std::ranges::views::zip(*vec1, *vec2, indices_, sorting_idxs);
+        ranges::view::zip(*vec1, *vec2, indices_, sorting_idxs);
     const auto  thread_level =
         (idx_s < ThreadPool::MUL_THR_THHOLD) ? 0L : get_thread_level();
 
@@ -309,9 +309,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, a_a);
+                ranges::sort(zip_idx, a_a);
             else
-                std::ranges::sort(zip, a_a);
+                ranges::sort(zip, a_a);
         }
     }
     else if (dir1 == sort_spec::desce && dir2 == sort_spec::desce)  {
@@ -323,9 +323,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, d_d);
+                ranges::sort(zip_idx, d_d);
             else
-                std::ranges::sort(zip, d_d);
+                ranges::sort(zip, d_d);
         }
     }
     else if (dir1 == sort_spec::ascen && dir2 == sort_spec::desce)  {
@@ -337,9 +337,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, a_d);
+                ranges::sort(zip_idx, a_d);
             else
-                std::ranges::sort(zip, a_d);
+                ranges::sort(zip, a_d);
         }
     }
     else if (dir1 == sort_spec::desce && dir2 == sort_spec::ascen)  {
@@ -351,9 +351,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, d_a);
+                ranges::sort(zip_idx, d_a);
             else
-                std::ranges::sort(zip, d_a);
+                ranges::sort(zip, d_a);
         }
     }
     else if (dir1 == sort_spec::abs_ascen && dir2 == sort_spec::abs_ascen)  {
@@ -365,9 +365,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, aa_aa);
+                ranges::sort(zip_idx, aa_aa);
             else
-                std::ranges::sort(zip, aa_aa);
+                ranges::sort(zip, aa_aa);
         }
     }
     else if (dir1 == sort_spec::abs_desce && dir2 == sort_spec::abs_desce)  {
@@ -379,9 +379,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, ad_ad);
+                ranges::sort(zip_idx, ad_ad);
             else
-                std::ranges::sort(zip, ad_ad);
+                ranges::sort(zip, ad_ad);
         }
     }
     else if (dir1 == sort_spec::abs_ascen && dir2 == sort_spec::abs_desce)  {
@@ -393,9 +393,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, aa_ad);
+                ranges::sort(zip_idx, aa_ad);
             else
-                std::ranges::sort(zip, aa_ad);
+                ranges::sort(zip, aa_ad);
         }
     }
     else if (dir1 == sort_spec::abs_desce && dir2 == sort_spec::abs_ascen)  {
@@ -407,9 +407,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, ad_aa);
+                ranges::sort(zip_idx, ad_aa);
             else
-                std::ranges::sort(zip, ad_aa);
+                ranges::sort(zip, ad_aa);
         }
     }
     else if (dir1 == sort_spec::ascen && dir2 == sort_spec::abs_ascen)  {
@@ -421,9 +421,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, a_aa);
+                ranges::sort(zip_idx, a_aa);
             else
-                std::ranges::sort(zip, a_aa);
+                ranges::sort(zip, a_aa);
         }
     }
     else if (dir1 == sort_spec::ascen && dir2 == sort_spec::abs_desce)  {
@@ -435,9 +435,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, a_ad);
+                ranges::sort(zip_idx, a_ad);
             else
-                std::ranges::sort(zip, a_ad);
+                ranges::sort(zip, a_ad);
         }
     }
     else if (dir1 == sort_spec::desce && dir2 == sort_spec::abs_ascen)  {
@@ -449,9 +449,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, d_aa);
+                ranges::sort(zip_idx, d_aa);
             else
-                std::ranges::sort(zip, d_aa);
+                ranges::sort(zip, d_aa);
         }
     }
     else if (dir1 == sort_spec::desce && dir2 == sort_spec::abs_desce)  {
@@ -463,9 +463,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, d_ad);
+                ranges::sort(zip_idx, d_ad);
             else
-                std::ranges::sort(zip, d_ad);
+                ranges::sort(zip, d_ad);
         }
     }
     else if (dir1 == sort_spec::abs_ascen && dir2 == sort_spec::ascen)  {
@@ -477,9 +477,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, aa_a);
+                ranges::sort(zip_idx, aa_a);
             else
-                std::ranges::sort(zip, aa_a);
+                ranges::sort(zip, aa_a);
         }
     }
     else if (dir1 == sort_spec::abs_desce && dir2 == sort_spec::ascen)  {
@@ -491,9 +491,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, ad_a);
+                ranges::sort(zip_idx, ad_a);
             else
-                std::ranges::sort(zip, ad_a);
+                ranges::sort(zip, ad_a);
         }
     }
     else if (dir1 == sort_spec::abs_ascen && dir2 == sort_spec::desce)  {
@@ -505,9 +505,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, aa_d);
+                ranges::sort(zip_idx, aa_d);
             else
-                std::ranges::sort(zip, aa_d);
+                ranges::sort(zip, aa_d);
         }
     }
     else  {   // dir1 == sort_spec::abs_desce && dir2 == sort_spec::desce
@@ -519,9 +519,9 @@ sort(const char *name1, sort_spec dir1,
         }
         else  {
             if (! ignore_index)
-                std::ranges::sort(zip_idx, ad_d);
+                ranges::sort(zip_idx, ad_d);
             else
-                std::ranges::sort(zip, ad_d);
+                ranges::sort(zip, ad_d);
         }
     }
 
@@ -661,9 +661,9 @@ sort(const char *name1, sort_spec dir1,
     std::iota(sorting_idxs.begin(), sorting_idxs.end(), 0);
 
     auto        zip =
-        std::ranges::views::zip(*vec1, *vec2, *vec3, sorting_idxs);
+        ranges::view::zip(*vec1, *vec2, *vec3, sorting_idxs);
     auto        zip_idx =
-        std::ranges::views::zip(*vec1, *vec2, *vec3, indices_, sorting_idxs);
+        ranges::view::zip(*vec1, *vec2, *vec3, indices_, sorting_idxs);
     const auto  thread_level =
         (idx_s < ThreadPool::MUL_THR_THHOLD) ? 0L : get_thread_level();
 
@@ -675,9 +675,9 @@ sort(const char *name1, sort_spec dir1,
     }
     else  {
         if (! ignore_index)
-            std::ranges::sort(zip_idx, cf);
+            ranges::sort(zip_idx, cf);
         else
-            std::ranges::sort(zip, cf);
+            ranges::sort(zip, cf);
     }
 
     if (((column_list_.size() - 3) > 1) && get_thread_level() > 2)  {
@@ -854,9 +854,9 @@ sort(const char *name1, sort_spec dir1,
     std::iota(sorting_idxs.begin(), sorting_idxs.end(), 0);
 
     auto         zip =
-        std::ranges::views::zip(*vec1, *vec2, *vec3, *vec4, sorting_idxs);
+        ranges::view::zip(*vec1, *vec2, *vec3, *vec4, sorting_idxs);
     auto         zip_idx =
-        std::ranges::views::zip(*vec1, *vec2, *vec3, *vec4,
+        ranges::view::zip(*vec1, *vec2, *vec3, *vec4,
                                 indices_, sorting_idxs);
     const auto  thread_level =
         (idx_s < ThreadPool::MUL_THR_THHOLD) ? 0L : get_thread_level();
@@ -869,9 +869,9 @@ sort(const char *name1, sort_spec dir1,
     }
     else  {
         if (! ignore_index)
-            std::ranges::sort(zip_idx, cf);
+            ranges::sort(zip_idx, cf);
         else
-            std::ranges::sort(zip, cf);
+            ranges::sort(zip, cf);
     }
 
     if (((column_list_.size() - 4) > 1) && get_thread_level() > 2)  {
@@ -1086,10 +1086,10 @@ sort(const char *name1, sort_spec dir1,
     std::iota(sorting_idxs.begin(), sorting_idxs.end(), 0);
 
     auto        zip =
-        std::ranges::views::zip(*vec1, *vec2, *vec3, *vec4, *vec5,
+        ranges::view::zip(*vec1, *vec2, *vec3, *vec4, *vec5,
                                 sorting_idxs);
     auto        zip_idx =
-        std::ranges::views::zip(*vec1, *vec2, *vec3, *vec4, *vec5,
+        ranges::view::zip(*vec1, *vec2, *vec3, *vec4, *vec5,
                                 indices_, sorting_idxs);
     const auto  thread_level =
         (idx_s < ThreadPool::MUL_THR_THHOLD) ? 0L : get_thread_level();
@@ -1102,9 +1102,9 @@ sort(const char *name1, sort_spec dir1,
     }
     else  {
         if (! ignore_index)
-            std::ranges::sort(zip_idx, cf);
+            ranges::sort(zip_idx, cf);
         else
-            std::ranges::sort(zip, cf);
+            ranges::sort(zip, cf);
     }
 
     if (((column_list_.size() - 5) > 1) && get_thread_level() > 2)  {

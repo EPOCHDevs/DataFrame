@@ -373,7 +373,7 @@ static void test_apply()  {
               9.0221, 0.0134307 };
 
         for (const auto &[ans, act]
-                 : std::ranges::views::zip(out_res, dbl_col))
+                 : ranges::views::zip(out_res, dbl_col))
             assert(std::fabs(ans - act) < 0.0001);
     }
 
@@ -397,7 +397,7 @@ static void test_apply()  {
               9.0221, 0.263431 };
 
         for (const auto &[ans, act]
-                 : std::ranges::views::zip(out_res, dbl_col))
+                 : ranges::views::zip(out_res, dbl_col))
             assert(std::fabs(ans - act) < 0.0001);
     }
 

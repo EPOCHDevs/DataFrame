@@ -1,5 +1,8 @@
+
+find_package(TBB CONFIG REQUIRED)
+
 add_executable(dataframe_tester dataframe_tester.cc)
-target_link_libraries(dataframe_tester PRIVATE DataFrame Threads::Threads)
+target_link_libraries(dataframe_tester PRIVATE DataFrame Threads::Threads TBB::tbb)
 target_compile_options(dataframe_tester
     PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>
 )
@@ -12,14 +15,14 @@ if(MSVC)
 endif()
 
 add_executable(dataframe_tester_2 dataframe_tester_2.cc)
-target_link_libraries(dataframe_tester_2 PRIVATE DataFrame)
+target_link_libraries(dataframe_tester_2 PRIVATE DataFrame TBB::tbb)
 target_compile_options(dataframe_tester_2
     PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>
 )
 add_test(NAME dataframe_tester_2 COMMAND dataframe_tester_2)
 
 add_executable(dataframe_tester_3 dataframe_tester_3.cc)
-target_link_libraries(dataframe_tester_3 PRIVATE DataFrame)
+target_link_libraries(dataframe_tester_3 PRIVATE DataFrame TBB::tbb)
 target_compile_options(dataframe_tester_3
     PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>
 )
@@ -41,17 +44,17 @@ elseif(CMAKE_SYSTEM_NAME MATCHES "Darwin")
 elseif(APPLE)
     set_tests_properties(dataframe_tester_4 PROPERTIES DISABLED TRUE)
 endif()
-target_link_libraries(dataframe_tester_4 PRIVATE DataFrame)
+target_link_libraries(dataframe_tester_4 PRIVATE DataFrame TBB::tbb)
 target_compile_options(dataframe_tester_4
     PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>
 )
 
 add_executable(dataframe_tester_schema dataframe_tester_schema.cc)
-target_link_libraries(dataframe_tester_schema PRIVATE DataFrame)
+target_link_libraries(dataframe_tester_schema PRIVATE DataFrame TBB::tbb)
 add_test(NAME dataframe_tester_schema COMMAND dataframe_tester_schema)
 
 add_executable(vectors_tester vectors_tester.cc)
-target_link_libraries(vectors_tester PRIVATE DataFrame)
+target_link_libraries(vectors_tester PRIVATE DataFrame TBB::tbb)
 target_compile_options(vectors_tester
     PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>
 )
@@ -62,7 +65,7 @@ if(MSVC)
 endif()
 
 add_executable(matrix_tester matrix_tester.cc)
-target_link_libraries(matrix_tester PRIVATE DataFrame)
+target_link_libraries(matrix_tester PRIVATE DataFrame TBB::tbb)
 target_compile_options(matrix_tester
     PRIVATE $<$<CXX_COMPILER_ID:MSVC>:/bigobj>
 )
@@ -71,26 +74,26 @@ add_test(NAME matrix_tester COMMAND matrix_tester)
 if(NOT MSVC)
     # MSVC compiler craps out on immediately executing lambdas
     add_executable(allocator_tester allocator_tester.cc)
-    target_link_libraries(allocator_tester PRIVATE DataFrame)
+    target_link_libraries(allocator_tester PRIVATE DataFrame TBB::tbb)
     add_test(NAME allocator_tester COMMAND allocator_tester)
 endif()
 
 add_executable(vector_ptr_view_tester vector_ptr_view_tester.cc)
-target_link_libraries(vector_ptr_view_tester PRIVATE DataFrame)
+target_link_libraries(vector_ptr_view_tester PRIVATE DataFrame TBB::tbb)
 add_test(NAME vector_ptr_view_tester COMMAND vector_ptr_view_tester)
 
 add_executable(meta_prog_tester meta_prog_tester.cc)
-target_link_libraries(meta_prog_tester PRIVATE DataFrame)
+target_link_libraries(meta_prog_tester PRIVATE DataFrame TBB::tbb)
 add_test(NAME meta_prog_tester COMMAND meta_prog_tester)
 
 add_executable(date_time_tester date_time_tester.cc)
-target_link_libraries(date_time_tester PRIVATE DataFrame)
+target_link_libraries(date_time_tester PRIVATE DataFrame TBB::tbb)
 add_test(NAME date_time_tester COMMAND date_time_tester)
 
 add_executable(gen_rand_tester gen_rand_tester.cc)
-target_link_libraries(gen_rand_tester PRIVATE DataFrame)
+target_link_libraries(gen_rand_tester PRIVATE DataFrame TBB::tbb)
 add_test(NAME gen_rand_tester COMMAND gen_rand_tester)
 
 add_executable(dataframe_thread_safety dataframe_thread_safety.cc)
-target_link_libraries(dataframe_thread_safety PRIVATE DataFrame Threads::Threads)
+target_link_libraries(dataframe_thread_safety PRIVATE DataFrame TBB::tbb Threads::Threads)
 add_test(NAME dataframe_thread_safety COMMAND dataframe_thread_safety)

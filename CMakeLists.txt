@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.8)
-set(CMAKE_CXX_STANDARD 23)
+
+set(CMAKE_TOOLCHAIN_FILE $ENV{HOME}/vcpkg/scripts/buildsystems/vcpkg.cmake CACHE STRING "Vcpkg toolchain file")
+
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 if(POLICY CMP0090)
@@ -11,6 +14,8 @@ project(DataFrame VERSION 3.0.0 LANGUAGES CXX)
 option(HMDF_TESTING "Enable testing" OFF)
 option(HMDF_EXAMPLES "Build Examples" OFF)
 option(HMDF_BENCHMARKS "Build Benchmarks" OFF)
+
+find_package(range-v3 CONFIG REQUIRED)
 
 if(HMDF_TESTING)
     enable_testing()
@@ -41,7 +46,7 @@ add_library(DataFrame::DataFrame ALIAS DataFrame)
 
 target_sources(DataFrame PRIVATE src/Utils/DateTime.cc)
 
-target_compile_features(DataFrame PUBLIC cxx_std_23)
+target_compile_features(DataFrame PUBLIC cxx_std_20)
 target_compile_definitions(
     DataFrame
     PRIVATE $<$<BOOL:${HMDF_HAVE_CLOCK_GETTIME}>:HMDF_HAVE_CLOCK_GETTIME>
@@ -72,7 +77,7 @@ endif()
 
 target_link_libraries(
     DataFrame
-    INTERFACE Threads::Threads
+    INTERFACE Threads::Threads range-v3::range-v3
               $<$<AND:$<BOOL:${UNIX}>,$<NOT:$<BOOL:${APPLE}>>>:rt>
 )
 
